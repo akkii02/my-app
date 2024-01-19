@@ -14,17 +14,31 @@ const DUMMY_MEETUP_DATA = [
     image:'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg',
     address:'Some address',
     description:'This is second meetup',
-  },
-  {
-    id:'m3',
-    title:'A Third  Meetup',
-    image:'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg',
-    address:'Some address',
-    description:'This is third meetup',
   }
 ]
 
-function HomePage(){
-  return  <MeetupList meetups={DUMMY_MEETUP_DATA} />
+function HomePage(props){
+  return  <MeetupList meetups={props.meetups} />
 }
+
+// export async function getServerSideProps(context){
+//   const req = context.req;
+//   const res = context.res;
+//   return {
+//     props:{
+//       meetups:DUMMY_MEETUP_DATA
+//     }
+//   }
+// }
+
+
+export async function getStaticProps (){
+  return {
+    props: {
+      meetups:DUMMY_MEETUP_DATA
+    },
+    revalidate:1
+  }
+}
+
 export default HomePage;
